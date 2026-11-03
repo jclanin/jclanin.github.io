@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Joe Clanin — Computer Science Ph.D. candidate at Iowa State University. Education, research publications, and teaching.">
+  <meta name="author" content="Joe Clanin">
+  <meta name="theme-color" content="#f9f8f5">
+  <title>Joe Clanin | Iowa State University</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f9f8f5;
+      --paper: #fffefa;
+      --ink: #202b35;
+      --muted: #67717a;
+      --accent: #9e4e3e;
+      --accent-dark: #76372e;
+      --rule: #dcdedb;
+      --soft-rule: #e9e8e3;
+      --highlight: #f0e9df;
+      --serif: Iowan Old Style, Baskerville, Palatino Linotype, Book Antiqua, Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+    .site-shell { width: min(100% - 64px, 960px); margin: auto; }
+    .site-nav { border-bottom: 1px solid var(--rule); }
+    .nav-inner { min-height: 84px; display: flex; justify-content: flex-end; align-items: center; gap: 24px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.88rem; font-weight: 600; text-decoration: none; color: var(--muted); transition: color .16s ease; }
+    .nav-links a:hover { color: var(--accent-dark); }
+    .hero { padding: 86px 0 92px; border-bottom: 1px solid var(--rule); }
+    .eyebrow {
+      margin: 0 0 18px;
+      font-size: .75rem;
+      font-weight: 750;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(3.9rem, 9.5vw, 6.7rem); letter-spacing: -.068em; line-height: 1.03; margin: 0 0 22px; }
+    .hero-subtitle { font-size: clamp(1.1rem, 2.2vw, 1.36rem); margin: 0; color: var(--ink); font-weight: 450; }
+    .hero-affiliation { font-size: 1rem; margin: 5px 0 26px; color: var(--muted); }
+    .contact-link { display: inline-flex; gap: 9px; align-items: center; text-decoration: none; color: var(--accent-dark); font-size: .94rem; font-weight: 600; padding-bottom: 2px; border-bottom: 1px solid #cbaaa0; }
+    .contact-link:hover { border-bottom-color: var(--accent); }
+    .contact-link svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .profile-links { display: flex; gap: 12px 20px; flex-wrap: wrap; align-items: center; margin-top: 21px; font-size: .92rem; }
+    .profile-links a { color: var(--accent-dark); font-weight: 600; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    .profile-links a:hover { color: var(--accent); }
+    .profile-links .search-note { font-weight: 400; color: var(--muted); font-size: .8rem; }
+    .content-section { padding: 64px 0 68px; border-bottom: 1px solid var(--rule); scroll-margin-top: 20px; }
+    .section-header { display: grid; grid-template-columns: 215px minmax(0, 1fr); column-gap: 48px; align-items: start; }
+    .section-heading { font-family: var(--serif); font-size: clamp(1.75rem, 3.4vw, 2.25rem); line-height: 1.15; letter-spacing: -.035em; font-weight: 500; margin: 2px 0 0; }
+    .section-body { min-width: 0; }
+    .education-list { display: grid; }
+    .education-item { display: grid; grid-template-columns: 94px minmax(0, 1fr); column-gap: 24px; padding: 0 0 23px; }
+    .education-item + .education-item { border-top: 1px solid var(--soft-rule); padding-top: 23px; }
+    .education-item:last-child { padding-bottom: 0; }
+    .education-year { color: var(--accent); font-weight: 750; font-size: .85rem; padding-top: 4px; white-space: nowrap; }
+    .degree { font-size: 1.04rem; font-weight: 680; line-height: 1.4; margin: 0 0 2px; }
+    .school { color: var(--muted); font-size: .94rem; margin: 0; }
+    .expected { color: var(--accent-dark); font-weight: 550; font-size: .87rem; margin: 3px 0 0; }
+    .publication-list { list-style: none; padding: 0; margin: 0; counter-reset: none; }
+    .publication { padding-bottom: 28px; }
+    .publication + .publication { padding-top: 28px; border-top: 1px solid var(--soft-rule); }
+    .publication:last-child { padding-bottom: 0; }
+    .paper-title { font-size: 1.075rem; font-weight: 730; line-height: 1.45; letter-spacing: -.012em; margin: 0 0 5px; }
+    .paper-authors { margin: 0; font-size: .935rem; color: var(--ink); }
+    .paper-venue { margin: 2px 0 7px; color: var(--muted); font-size: .925rem; }
+    .paper-links { margin: 0; display: flex; flex-wrap: wrap; gap: 5px 9px; align-items: center; font-size: .865rem; }
+    .paper-links a { font-weight: 640; text-decoration: none; color: var(--accent-dark); }
+    .paper-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .paper-links .separator { color: #a8aaa7; }
+    .teaching-group { padding: 0 0 27px; }
+    .teaching-group + .teaching-group { border-top: 1px solid var(--soft-rule); padding-top: 27px; }
+    .teaching-group:last-child { padding-bottom: 0; }
+    .teaching-role { margin: 0 0 12px; font-size: 1.075rem; font-weight: 730; line-height: 1.45; }
+    .teaching-department { margin: 14px 0 2px; color: var(--muted); font-size: .87rem; font-weight: 650; }
+    .teaching-course-list { list-style: none; margin: 3px 0 0; padding: 0; }
+    .teaching-course-list li { display: grid; grid-template-columns: 118px minmax(0, 1fr); column-gap: 12px; padding: 4px 0; line-height: 1.6; }
+    .teaching-course-number { font-weight: 650; white-space: nowrap; }
+    .teaching-course-title { color: var(--ink); }
+    @media (max-width: 480px) {
+      .teaching-course-list li { grid-template-columns: 1fr; row-gap: 0; padding: 7px 0; }
+      .teaching-course-title { padding-left: 0; }
+    }
+    .self { font-weight: 700; }
+    .site-footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0 45px; color: var(--muted); font-size: .81rem; }
+    .back-to-top { color: var(--accent-dark); text-decoration: none; font-weight: 650; }
+    .back-to-top:hover { text-decoration: underline; }
+    @media (max-width: 780px) {
+      .site-shell { width: min(100% - 42px, 640px); }
+      .hero { padding: 70px 0; }
+      .section-header { grid-template-columns: 1fr; gap: 32px; }
+      .content-section { padding: 52px 0; }
+    }
+    @media (max-width: 480px) {
+      .site-shell { width: min(100% - 34px, 640px); }
+      .nav-inner { min-height: 70px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: .81rem; }
+      .hero { padding: 62px 0; }
+      .hero-affiliation { margin-bottom: 22px; }
+      .education-item { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; }
+      .education-year { font-size: .8rem; }
+      .site-footer { padding-bottom: 26px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      :root { --background: white; --ink: black; --muted: #555; }
+      body { font-size: 11pt; }
+      .site-shell { max-width: none; width: 100%; }
+      .site-nav, .site-footer { display: none; }
+      .hero { padding: 0 0 28px; }
+      h1 { font-size: 44pt; }
+      .content-section { padding: 28px 0; }
+      .publication { break-inside: avoid; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body id="top">
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="site-shell nav-inner">
+      <div class="nav-links">
+        <a href="#education">Education</a>
+        <a href="#publications">Research</a>
+        <a href="#teaching">Teaching</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="site-shell">
+    <header class="hero">
+      <p class="eyebrow">Iowa State University · Computer Science</p>
+      <h1>Joe Clanin</h1>
+      <p class="hero-subtitle">Ph.D. Candidate in Computer Science</p>
+      <p class="hero-affiliation">Iowa State University · Ames, Iowa</p>
+      <a class="contact-link" href="mailto:jsc@iastate.edu" aria-label="Email Joe Clanin at jsc@iastate.edu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><path d="M3.5 6.5 12 13l8.5-6.5"></path></svg>
+        jsc@iastate.edu
+      </a>
+      <div class="profile-links" aria-label="Academic profiles">
+        <a href="https://dblp.org/pid/326/1079" target="_blank" rel="noopener noreferrer">DBLP</a>
+        <a href="https://scholar.google.com/citations?user=dc5YjOAAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="https://orcid.org/0009-0008-0908-9044" target="_blank" rel="noopener noreferrer">ORCID</a>
+      </div>
+    </header>
+
+    <section class="content-section section-header" id="education" aria-labelledby="education-heading">
+      <h2 class="section-heading" id="education-heading">Education</h2>
+      <div class="section-body education-list">
+        <div class="education-item">
+          <div class="education-year">Spring 2027</div>
+          <div>
+            <p class="degree">Ph.D. in Computer Science</p>
+            <p class="school">Iowa State University</p>
+            <p class="expected">Expected</p>
+          </div>
+        </div>
+        <div class="education-item">
+          <div class="education-year">2021</div>
+          <div>
+            <p class="degree">M.S. in Computer Science</p>
+            <p class="school">Iowa State University</p>
+          </div>
+        </div>
+        <div class="education-item">
+          <div class="education-year">2017</div>
+          <div>
+            <p class="degree">B.S. in Mathematics</p>
+            <p class="degree">B.S. in Computer Science</p>
+            <p class="school">Iowa State University</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section section-header" id="publications" aria-labelledby="publications-heading">
+      <h2 class="section-heading" id="publications-heading">Research<br>Publications<br>and Preprints</h2>
+      <div class="section-body">
+        <ol class="publication-list">
+          <li class="publication">
+            <h3 class="paper-title">An Ordinal Extension Characterization of the Regular Languages with Applications</h3>
+            <p class="paper-authors"><span class="self">Joe Clanin</span>, Jack H. Lutz, Matthew Rayman, and Giora Slutzki</p>
+            <p class="paper-venue">arXiv preprint arXiv:2001.08846v2, 2026</p>
+            <p class="paper-links"><a href="https://arxiv.org/abs/2001.08846v2" target="_blank" rel="noopener noreferrer">[arXiv]</a></p>
+          </li>
+          <li class="publication">
+            <h3 class="paper-title">Finite-State Dimension and the Davenport-Erdős Theorem</h3>
+            <p class="paper-authors"><span class="self">Joe Clanin</span> and Matthew Rayman</p>
+            <p class="paper-venue">Mathematical Foundations of Computer Science (MFCS), 2026</p>
+            <p class="paper-links"><a href="https://arxiv.org/abs/2506.02332" target="_blank" rel="noopener noreferrer">[arXiv]</a><span class="separator" aria-hidden="true">·</span><a href="https://doi.org/10.4230/LIPIcs.MFCS.2026.38" target="_blank" rel="noopener noreferrer">[conference]</a></p>
+          </li>
+          <li class="publication">
+            <h3 class="paper-title">Security Resource Investment Optimization for Critical Infrastructure Systems: A Game-Theoretic Approach</h3>
+            <p class="paper-authors"><span class="self">Joe Clanin</span> and Sourabh Bhattacharya</p>
+            <p class="paper-venue">American Control Conference (ACC), 2022</p>
+            <p class="paper-links"><a href="https://doi.org/10.23919/ACC53348.2022.9867416" target="_blank" rel="noopener noreferrer">[conference]</a><span class="separator" aria-hidden="true">·</span><a href="https://par.nsf.gov/servlets/purl/10397574" target="_blank" rel="noopener noreferrer">[pdf]</a></p>
+          </li>
+          <li class="publication">
+            <h3 class="paper-title">An Efficient Computational Strategy for Cyber-Physical Contingency Analysis in Smart Grids</h3>
+            <p class="paper-authors">Hamid Emadi, <span class="self">Joe Clanin</span>, Burhan Hyder, Kush Khanna, Manimaran Govindarasu, and Sourabh Bhattacharya</p>
+            <p class="paper-venue">IEEE Power &amp; Energy Society General Meeting (PESGM), 2021</p>
+            <p class="paper-links"><a href="https://ieeexplore.ieee.org/document/9637857" target="_blank" rel="noopener noreferrer">[conference]</a><span class="separator" aria-hidden="true">·</span><a href="https://par.nsf.gov/servlets/purl/10311920" target="_blank" rel="noopener noreferrer">[pdf]</a></p>
+          </li>
+          <li class="publication">
+            <h3 class="paper-title">Analytic Computable Structure Theory and <i>L</i><sup>p</sup> Spaces</h3>
+            <p class="paper-authors"><span class="self">Joe Clanin</span>, Timothy H. McNicholl, and Don M. Stull</p>
+            <p class="paper-venue"><i>Fundamenta Mathematicae</i>, 244(3):255–285, 2019</p>
+            <p class="paper-links"><a href="https://arxiv.org/abs/1701.00840" target="_blank" rel="noopener noreferrer">[arXiv]</a><span class="separator" aria-hidden="true">·</span><a href="https://doi.org/10.4064/fm448-5-2018" target="_blank" rel="noopener noreferrer">[journal]</a></p>
+          </li>
+          <li class="publication">
+            <h3 class="paper-title">A Necessary and Sufficient Condition for Coincidence with the Weak Topology</h3>
+            <p class="paper-authors"><span class="self">Joseph Clanin</span> and Kristopher Lee</p>
+            <p class="paper-venue"><i>Involve, a Journal of Mathematics</i>, 10(2):257–261, 2017</p>
+            <p class="paper-links"><a href="https://doi.org/10.2140/involve.2017.10.257" target="_blank" rel="noopener noreferrer">[journal]</a><span class="separator" aria-hidden="true">·</span><a href="https://msp.org/involve/2017/10-2/involve-v10-n2-p05-s.pdf" target="_blank" rel="noopener noreferrer">[pdf]</a></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="content-section section-header" id="teaching" aria-labelledby="teaching-heading">
+      <h2 class="section-heading" id="teaching-heading">Teaching</h2>
+      <div class="section-body">
+        <div class="teaching-group">
+          <h3 class="teaching-role">Graduate Instructor</h3>
+          <p class="teaching-department">Mathematics</p>
+          <ul class="teaching-course-list">
+            <li><span class="teaching-course-number">MATH 1600</span><span class="teaching-course-title">Survey of Calculus</span></li>
+            <li><span class="teaching-course-number">MATH 1650</span><span class="teaching-course-title">Calculus I</span></li>
+            <li><span class="teaching-course-number">MATH 2070</span><span class="teaching-course-title">Matrices and Linear Algebra</span></li>
+          </ul>
+        </div>
+        <div class="teaching-group">
+          <h3 class="teaching-role">Teaching Assistant</h3>
+          <p class="teaching-department">Computer Science</p>
+          <ul class="teaching-course-list">
+            <li><span class="teaching-course-number">COM S 3310</span><span class="teaching-course-title">Theory of Computation</span></li>
+            <li><span class="teaching-course-number">COM S 4330</span><span class="teaching-course-title">Molecular Programming of Nanoscale Devices and Processes</span></li>
+            <li><span class="teaching-course-number">COM S 5310</span><span class="teaching-course-title">Theory of Computation (Graduate)</span></li>
+          </ul>
+          <p class="teaching-department">Mathematics</p>
+          <ul class="teaching-course-list">
+            <li><span class="teaching-course-number">MATH 1650</span><span class="teaching-course-title">Calculus I</span></li>
+            <li><span class="teaching-course-number">MATH 1660</span><span class="teaching-course-title">Calculus II</span></li>
+            <li><span class="teaching-course-number">MATH 2650</span><span class="teaching-course-title">Calculus III</span></li>
+            <li><span class="teaching-course-number">MATH 2660</span><span class="teaching-course-title">Elementary Differential Equations</span></li>
+            <li><span class="teaching-course-number">MATH 2670</span><span class="teaching-course-title">Elementary Differential Equations and Laplace Transforms</span></li>
+            <li><span class="teaching-course-number">MATH 2070</span><span class="teaching-course-title">Matrices and Linear Algebra</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-shell site-footer">
+    <span>© 2026 Joe Clanin</span>
+    <a class="back-to-top" href="#top">Back to top ↑</a>
+  </footer>
+</body>
+</html>
