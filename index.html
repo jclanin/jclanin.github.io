@@ -6,6 +6,15 @@
   <meta name="description" content="Joe Clanin — Computer Science Ph.D. candidate at Iowa State University. Education, research publications, and teaching.">
   <meta name="author" content="Joe Clanin">
   <meta name="theme-color" content="#f9f8f5">
+  <script>
+    // Set the theme early to avoid a flash of the wrong colors.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("joe-clanin-theme"); } catch (e) {}
+      // Always begin in light mode unless the visitor previously selected dark.
+      document.documentElement.dataset.theme = saved === "dark" ? "dark" : "light";
+    }());
+  </script>
   <title>Joe Clanin | Iowa State University</title>
   <style>
     :root {
@@ -19,8 +28,29 @@
       --rule: #dcdedb;
       --soft-rule: #e9e8e3;
       --highlight: #f0e9df;
+      --contact-rule: #cbaaa0;
+      --separator: #a8aaa7;
+      --button-bg: #fffefa;
+      --button-hover: #f0e9df;
       --serif: Iowan Old Style, Baskerville, Palatino Linotype, Book Antiqua, Georgia, serif;
       --sans: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, sans-serif;
+    }
+    /* Light is the default; use dark colors only when explicitly selected. */
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --background: #151a20;
+      --paper: #1d242b;
+      --ink: #ecedea;
+      --muted: #aeb9c0;
+      --accent: #e8a492;
+      --accent-dark: #f0b5a4;
+      --rule: #343f47;
+      --soft-rule: #303941;
+      --highlight: #2a3339;
+      --contact-rule: #b37b70;
+      --separator: #808b92;
+      --button-bg: #1d242b;
+      --button-hover: #29343b;
     }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -41,6 +71,26 @@
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a { font-size: 0.88rem; font-weight: 600; text-decoration: none; color: var(--muted); transition: color .16s ease; }
     .nav-links a:hover { color: var(--accent-dark); }
+    .theme-toggle {
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: var(--button-bg);
+      color: var(--ink);
+      width: 39px;
+      height: 39px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: background-color .16s ease, border-color .16s ease;
+    }
+    .theme-toggle:hover { background: var(--button-hover); border-color: var(--accent); }
+    .theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .theme-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    :root[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
+    :root:not([data-theme="dark"]) .theme-toggle .sun-icon { display: none; }
     .hero { padding: 86px 0 92px; border-bottom: 1px solid var(--rule); }
     .eyebrow {
       margin: 0 0 18px;
@@ -53,7 +103,7 @@
     h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(3.9rem, 9.5vw, 6.7rem); letter-spacing: -.068em; line-height: 1.03; margin: 0 0 22px; }
     .hero-subtitle { font-size: clamp(1.1rem, 2.2vw, 1.36rem); margin: 0; color: var(--ink); font-weight: 450; }
     .hero-affiliation { font-size: 1rem; margin: 5px 0 26px; color: var(--muted); }
-    .contact-link { display: inline-flex; gap: 9px; align-items: center; text-decoration: none; color: var(--accent-dark); font-size: .94rem; font-weight: 600; padding-bottom: 2px; border-bottom: 1px solid #cbaaa0; }
+    .contact-link { display: inline-flex; gap: 9px; align-items: center; text-decoration: none; color: var(--accent-dark); font-size: .94rem; font-weight: 600; padding-bottom: 2px; border-bottom: 1px solid var(--contact-rule); }
     .contact-link:hover { border-bottom-color: var(--accent); }
     .contact-link svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
     .profile-links { display: flex; gap: 12px 20px; flex-wrap: wrap; align-items: center; margin-top: 21px; font-size: .92rem; }
@@ -82,7 +132,7 @@
     .paper-links { margin: 0; display: flex; flex-wrap: wrap; gap: 5px 9px; align-items: center; font-size: .865rem; }
     .paper-links a { font-weight: 640; text-decoration: none; color: var(--accent-dark); }
     .paper-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
-    .paper-links .separator { color: #a8aaa7; }
+    .paper-links .separator { color: var(--separator); }
     .teaching-group { padding: 0 0 27px; }
     .teaching-group + .teaching-group { border-top: 1px solid var(--soft-rule); padding-top: 27px; }
     .teaching-group:last-child { padding-bottom: 0; }
@@ -109,7 +159,9 @@
     @media (max-width: 480px) {
       .site-shell { width: min(100% - 34px, 640px); }
       .nav-inner { min-height: 70px; }
-      .nav-links { gap: 16px; }
+      .nav-inner { gap: 12px; }
+      .nav-links { gap: 14px; }
+      .theme-toggle { width: 34px; height: 34px; }
       .nav-links a { font-size: .81rem; }
       .hero { padding: 62px 0; }
       .hero-affiliation { margin-bottom: 22px; }
@@ -119,7 +171,16 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     @media print {
-      :root { --background: white; --ink: black; --muted: #555; }
+      :root, :root[data-theme="dark"] {
+        color-scheme: light;
+        --background: white;
+        --ink: black;
+        --muted: #555;
+        --accent: #7d4037;
+        --accent-dark: #7d4037;
+        --rule: #ccc;
+        --soft-rule: #ddd;
+      }
       body { font-size: 11pt; }
       .site-shell { max-width: none; width: 100%; }
       .site-nav, .site-footer { display: none; }
@@ -139,6 +200,10 @@
         <a href="#publications">Research</a>
         <a href="#teaching">Teaching</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.6 8.6 0 0 1 8.6 3.9 8.6 8.6 0 1 0 20.1 15.4Z"/></svg>
+        <svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
     </div>
   </nav>
 
@@ -270,5 +335,26 @@
     <span>© 2026 Joe Clanin</span>
     <a class="back-to-top" href="#top">Back to top ↑</a>
   </footer>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.getElementById("theme-toggle");
+      var themeColor = document.querySelector('meta[name="theme-color"]');
+      function updateButton() {
+        var dark = root.dataset.theme === "dark";
+        var label = dark ? "Switch to light mode" : "Switch to dark mode";
+        toggle.setAttribute("aria-label", label);
+        toggle.setAttribute("title", label);
+        if (themeColor) themeColor.setAttribute("content", dark ? "#151a20" : "#f9f8f5");
+      }
+      toggle.addEventListener("click", function () {
+        var next = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        try { localStorage.setItem("joe-clanin-theme", next); } catch (e) {}
+        updateButton();
+      });
+      updateButton();
+    }());
+  </script>
 </body>
 </html>
